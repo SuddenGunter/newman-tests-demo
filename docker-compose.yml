@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      args:
+        TARGETOS: linux
+        TARGETARCH: amd64
+    restart: always
+    ports:
+      - 8080:8080

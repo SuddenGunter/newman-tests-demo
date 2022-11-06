@@ -1,0 +1,18 @@
+name: main
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  main:
+    name: run integration tests
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Start containers
+        run: docker-compose -f "docker-compose.yml" up -d --build
+      - uses: matt-ball/newman-action@master
+        with:
+          collection: sample.postman_collection.json
+          environment: dev.postman_environment.json
